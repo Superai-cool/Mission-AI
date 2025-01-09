@@ -2,22 +2,11 @@
 """
 AI Tool.py
 
-Final version for deployment on Streamlit or similar platforms.
+Final version for Streamlit deployment.
 """
 
 # Import required libraries
-import subprocess
-import sys
-
-# Ensure OpenAI library is installed
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-try:
-    import openai
-except ImportError:
-    install("openai")
-    import openai
+import openai
 
 # Function to generate LinkedIn comments
 def generate_linkedin_comment(api_key, post_content, tone):
@@ -77,3 +66,4 @@ if __name__ == "__main__":
         print(comment)
     else:
         print("API key, post content, and tone cannot be empty.")
+
