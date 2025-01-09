@@ -2,11 +2,12 @@
 """
 AI Tool.py
 
-Final version for Streamlit deployment.
+Final version for Streamlit deployment using environment variables for security.
 """
 
 # Import required libraries
 import openai
+import os
 
 # Function to generate LinkedIn comments
 def generate_linkedin_comment(api_key, post_content, tone):
@@ -56,14 +57,19 @@ def generate_linkedin_comment(api_key, post_content, tone):
 # Example usage
 if __name__ == "__main__":
     print("Welcome to the LinkedIn Comment Generator!")
-    api_key = input("Enter your OpenAI API key: ")
-    post_content = input("Paste the LinkedIn post content here: ")
-    tone = input("Enter the desired tone for the comment (e.g., friendly, professional, humorous): ")
-
-    if api_key.strip() and post_content.strip() and tone.strip():
-        comment = generate_linkedin_comment(api_key, post_content, tone)
-        print("\nGenerated Comment:")
-        print(comment)
+    
+    # Fetch the API key from environment variables
+    api_key = os.getenv("OPENAI_API_KEY")
+    
+    if not api_key:
+        print("Error: OpenAI API key not found. Please set it as an environment variable.")
     else:
-        print("API key, post content, and tone cannot be empty.")
+        post_content = input("Paste the LinkedIn post content here: ")
+        tone = input("Enter the desired tone for the comment (e.g., friendly, professional, humorous): ")
 
+        if post_content.strip() and tone.strip():
+            comment = generate_linkedin_comment(api_key, post_content, tone)
+            print("\nGenerated Comment:")
+            print(comment)
+        else:
+            print("Post content and tone cannot be empty.")
