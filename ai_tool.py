@@ -59,7 +59,7 @@ else:
 
                 try:
                     response = openai.ChatCompletion.create(
-                        model="gpt-4",
+                        model="gpt-4o",
                         messages=[
                             {"role": "system", "content": "You are an expert at generating LinkedIn comments."},
                             {"role": "user", "content": prompt}
